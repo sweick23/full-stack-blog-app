@@ -3,7 +3,7 @@ This is my first full-stack project with Node.Js.
 This project is a blogging App where a user can sign up for an account and login and CRUD articles. 
 users who come to the website can view articles but cannot edit, delete or create article.
 
-###Technologies used
+### Technologies used
 
 * HTML5
 * CSS3
