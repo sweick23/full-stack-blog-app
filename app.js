@@ -25,6 +25,8 @@ db.on('error', (err) => {
 // Initialize app
 const app = express();
 
+var port = process.env.PORT || 8080;
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(bodyParser.json());
@@ -108,6 +110,6 @@ app.use('/users', users);
 
 
 // Start server
-app.listen(8080, () => {
-    console.log('Server started on port', 8080);
+app.listen(port, () => {
+    console.log('Server started on port', port);
 });
