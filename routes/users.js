@@ -6,7 +6,7 @@ const passport = require('passport');
 
 // load models
 let User = require('../models/user');
-let Article = require('../models/article');
+let Note = require('../models/note');
 
 
 // Register form
@@ -75,7 +75,7 @@ router.get('/login', (req, res) => {
 
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: '/users/home',
+        successRedirect: '/notes/home',
         failureRedirect: '/users/login',
         failureFlash: true
     })(req, res, next);
@@ -91,21 +91,17 @@ router.get('/logout', function(req, res) {
 });
 
 // homepage for when logged in
-router.get('/home', (req, res) => {
-    Article.find({}, (err, articles) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.render('index', {
-                title: 'Articles',
-                articles: articles
 
-            });
-        }
 
-    });
-});
-
+// access control
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    } else {
+        req.flash('danger', 'Please login');
+        res.redirect('/users/login');
+    }
+}
 
 
 

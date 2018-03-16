@@ -1,7 +1,7 @@
-# Blog-app
+# NoteMaster
 This is my first full-stack project with Node.Js.
-This project is a blogging App where a user can sign up for an account and login and CRUD articles. 
-users who come to the website can view articles but cannot edit, delete or create article.
+This project is a Note App where a user can sign up for an account and login and CRUD Notes. 
+Notes that are created are tied to each individual user
 
 ### Technologies used
 
@@ -23,4 +23,4 @@ users who come to the website can view articles but cannot edit, delete or creat
 
 
 
-###### Visit the app <a href=''> here </a>
+###### Visit the app <a href='https://secure-woodland-59124.herokuapp.com/'> here </a>

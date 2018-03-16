@@ -76,7 +76,7 @@ app.use(passport.session());
 
 
 // load models
-let Article = require('./models/article');
+let Notes = require('./models/note');
 
 // Loading view engine
 app.set('views', path.join(__dirname, 'views'));
@@ -84,18 +84,10 @@ app.set('view engine', 'pug');
 
 // Home Route
 app.get('/', (req, res) => {
-    Article.find({}, (err, articles) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.render('index', {
-                title: 'Articles',
-                articles: articles
-            });
-        }
-
-    });
+    res.render('landing');
 });
+
+
 
 app.get('*', function(req, res, next) {
     res.locals.user = req.user || null;
@@ -103,9 +95,9 @@ app.get('*', function(req, res, next) {
 });
 
 // routes
-let articles = require('./routes/articles');
+let notes = require('./routes/notes');
 let users = require('./routes/users');
-app.use('/articles', articles);
+app.use('/notes', notes);
 app.use('/users', users);
 
 

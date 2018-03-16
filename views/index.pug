@@ -1,9 +1,11 @@
 extends layout
 
 block content
-  h1 #{title}
-  ul.list-group.articles
-    each article, i in articles
-      li.list-group-item 
-        a.art(href='/articles/'+ article._id)= article.title
-     
+    h1 #{title}
+      .bottom
+        .row.space
+          each note, i in notes
+            if user.id == note.author
+                .card.col-sm-3
+                    a.art.card-title(href='/notes/'+ note._id)= note.title
+          

@@ -1,25 +1,26 @@
 doctype html
 html
     head
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
         title Blog-app
         link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
         link(rel='stylesheet' href='/css/main.css')
     body
-        nav.navbar.navbar-inverse.bg-dark
+        nav.navbar.navbar-inverse.bg-dark.col-sm-12
             .container
                 .navbar-header
                     if user
-                        h5.blog Welcome #{user.name}
+                        h5.wel.title Welcome #{user.name}
                     else
-                        a.navbar-brand.blog(href='/') Blog-App
+                        a.navbar-brand.title(href='/') NoteMaster
                 .nav.navbar-nav.justify-content-lg-start
                     ul.nav.mbl
                        
                         if user
                             li.nav-item.space
-                                a.nav-link(href='/users/home') Home
+                                a.nav-link(href='/notes/home') Home
                             li.nav-item.space
-                                a.nav-link(href='/articles/add') Add Articles
+                                a.nav-link(href='/notes/add') Add Note
                             li.nav-item.space 
                                 a.nav-link(href='/users/logout') Logout
                         else

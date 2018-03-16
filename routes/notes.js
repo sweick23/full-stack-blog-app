@@ -2,14 +2,32 @@ const express = require('express');
 const router = express.Router();
 
 // Article Model
-let Article = require('../models/article');
+let Note = require('../models/note');
 // User Model
 let User = require('../models/user');
 
+
+
+// route for index
+router.get('/home', ensureAuthenticated, (req, res) => {
+    Note.find({}, (err, notes) => {
+
+        if (err) {
+            console.log(err);
+        } else {
+
+            res.render('index', {
+                title: 'My Notes',
+                notes: notes
+            });
+        }
+    });
+});
+
 // Add Route
 router.get('/add', ensureAuthenticated, function(req, res) {
-    res.render('add_article', {
-        title: 'Add Article'
+    res.render('add_note', {
+        title: 'Add Note'
     });
 });
 
@@ -23,23 +41,23 @@ router.post('/add', function(req, res) {
     let errors = req.validationErrors();
 
     if (errors) {
-        res.render('add_article', {
-            title: 'Add Article',
+        res.render('add_note', {
+            title: 'Add Note',
             errors: errors
         });
     } else {
-        let article = new Article();
-        article.title = req.body.title;
-        article.author = req.user._id;
-        article.body = req.body.body;
+        let note = new Note();
+        note.title = req.body.title;
+        note.author = req.user._id;
+        note.body = req.body.body;
 
-        article.save(function(err) {
+        note.save(function(err) {
             if (err) {
                 console.log(err);
                 return;
             } else {
-                req.flash('success', 'Article Added');
-                res.redirect('/');
+                req.flash('success', 'Note Added');
+                res.redirect('/notes/home');
             }
         });
     }
@@ -47,70 +65,67 @@ router.post('/add', function(req, res) {
 
 // Load Edit Form
 router.get('/edit/:id', ensureAuthenticated, function(req, res) {
-    Article.findById(req.params.id, function(err, article) {
-        if (article.author != req.user._id) {
+    Note.findById(req.params.id, function(err, note) {
+        if (note.author != req.user._id) {
             req.flash('danger', 'Not Authorized');
             res.redirect('/');
         }
-        res.render('edit_article', {
-            title: 'Edit Article',
-            article: article
+        res.render('edit_note', {
+            title: 'Edit Note',
+            note: note
         });
     });
 });
 
 // Update Submit POST Route
 router.post('/edit/:id', function(req, res) {
-    let article = {};
-    article.title = req.body.title;
-    article.author = req.body.author;
-    article.body = req.body.body;
+    let note = {};
+    note.title = req.body.title;
+    note.author = req.body.author;
+    note.body = req.body.body;
 
     let query = { _id: req.params.id }
 
-    Article.update(query, article, function(err) {
+    Note.update(query, article, function(err) {
         if (err) {
             console.log(err);
             return;
         } else {
-            req.flash('success', 'Article Updated');
-            res.redirect('/');
+            req.flash('success', 'Note Updated');
+            res.redirect('/notes/home');
         }
     });
 });
 
 // Delete Article
 router.delete('/:id', function(req, res) {
-    if (!req.user._id) {
-        res.status(500).send();
-    }
 
     let query = { _id: req.params.id }
 
-    Article.findById(req.params.id, function(err, article) {
-        if (article.author != req.user._id) {
-            res.status(500).send();
-        } else {
-            Article.remove(query, function(err) {
-                if (err) {
-                    console.log(err);
-                }
-                res.send('Success');
-            });
-        }
+    Note.findById(req.params.id, function(err, note) {
+
+        res.status(500).send();
+
+        Note.remove(query, function(err) {
+            if (err) {
+                console.log(err);
+            }
+            res.send('Success');
+        });
+
     });
 });
 
+
+
 // Get Single Article
 router.get('/:id', function(req, res) {
-    Article.findById(req.params.id, function(err, article) {
-        User.findById(article.author, function(err, user) {
-            res.render('article', {
-                article: article,
-                author: user.username
+    Note.findById(req.params.id, function(err, notes) {
+        User.findById(notes.author, function(err) {
+            res.render('note', {
+                notes: notes
 
             });
-
         });
     });
 });
