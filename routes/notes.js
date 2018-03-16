@@ -81,12 +81,12 @@ router.get('/edit/:id', ensureAuthenticated, function(req, res) {
 router.post('/edit/:id', function(req, res) {
     let note = {};
     note.title = req.body.title;
-    note.author = req.body.author;
+    note.author = req.user._id;
     note.body = req.body.body;
 
     let query = { _id: req.params.id }
 
-    Note.update(query, article, function(err) {
+    Note.update(query, note, function(err) {
         if (err) {
             console.log(err);
             return;
@@ -99,20 +99,23 @@ router.post('/edit/:id', function(req, res) {
 
 // Delete Article
 router.delete('/:id', function(req, res) {
+    if (!req.user._id) {
+        res.status(500).send();
+    }
 
     let query = { _id: req.params.id }
 
     Note.findById(req.params.id, function(err, note) {
-
-        res.status(500).send();
-
-        Note.remove(query, function(err) {
-            if (err) {
-                console.log(err);
-            }
-            res.send('Success');
-        });
-
+        if (note.author != req.user._id) {
+            res.status(500).send();
+        } else {
+            Note.remove(query, function(err) {
+                if (err) {
+                    console.log(err);
+                }
+                res.send('Success');
+            });
+        }
     });
 });
 
