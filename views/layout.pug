@@ -2,9 +2,10 @@ doctype html
 html
     head
         meta(name='viewport', content='width=device-width, initial-scale=1.0')
-        title Blog-app
+        title NoteMaster
         link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
         link(rel='stylesheet' href='/css/main.css')
+        link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     body
         nav.navbar.navbar-inverse.bg-dark.col-sm-12
             .container
@@ -12,7 +13,7 @@ html
                     if user
                         h5.wel.title Welcome #{user.name}
                     else
-                        a.navbar-brand.title(href='/') NoteMaster
+                        h5.navbar-brand.title NoteMaster
                 .nav.navbar-nav.justify-content-lg-start
                     ul.nav.mbl
                        
