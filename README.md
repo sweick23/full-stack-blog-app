@@ -23,4 +23,4 @@ Notes that are created are tied to each individual user
 
 
 
-###### Visit the app <a href='https://secure-woodland-59124.herokuapp.com/'> here </a>
+###### Visit the app <a href='https://secure-woodland-59124.herokuapp.com/' target='_blank'> here </a>
