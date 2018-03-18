@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey('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');
+
 
 
 // load models
@@ -13,6 +16,8 @@ let Note = require('../models/note');
 router.get('/register', (req, res) => {
     res.render('register');
 });
+
+
 
 
 // Register proccess
@@ -55,6 +60,16 @@ router.post('/register', (req, res) => {
                         console.log(err);
                         return;
                     } else {
+                        const msg = {
+                            to: req.body.email,
+                            from: 'no-reply@notemaster.com',
+                            subject: 'Welcome to NoteMaster',
+                            html: '<p>Thank you ' + req.body.name + ' for signing up with NoteMaster</p>',
+
+                        };
+                        sgMail.send(msg);
+                        console.log(msg);
+
                         req.flash('success', 'You are now registered and can log in');
                         res.redirect('/users/login');
                     }
