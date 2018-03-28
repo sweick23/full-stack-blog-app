@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey('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');
+sgMail.setApiKey('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');
 
 
 
