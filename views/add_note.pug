@@ -4,10 +4,8 @@ block content
     h1 #{title}
     form(method="POST", action="/notes/add")
         #form-group
-            label Title:
-            input.form-control(name='title', type='text')
+            input.form-control.add-note(name='title', type='text' placeholder='Note Title')
         #form-group
-            label Body:
-            textarea.form-control(name='body')
+            textarea.form-control.note-body(name='body' placeholder='Note Body')
         br
         input.btn.btn-primary(type='submit', value='submit')

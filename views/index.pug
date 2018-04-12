@@ -6,6 +6,5 @@ block content
         .row.space
           each note, i in notes
             if user.id == note.author
-                .card.col-sm-3
-                    a.art.card-title(href='/notes/'+ note._id)= note.title
-          
+              .w-100  
+                a.art(href='/notes/'+ note._id)= note.title

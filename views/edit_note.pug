@@ -3,11 +3,10 @@ extends layout
 block content
     h1 #{title}
     form(method="POST", action="/notes/edit/"+note._id)
+        input.btn.btn-primary.landscape-show.float-right(type='submit', value='submit')
         #form-group
-            label Title:
-            input.form-control(name='title', type='text', value=note.title)
+            input.form-control.add-note(name='title', type='text', value=note.title)
         #form-group
-            label Body:
-            textarea.form-control(name='body')= note.body
+            textarea.form-control.note-body(name='body')= note.body
         br
-        input.btn.btn-primary(type='submit', value='submit')
+        input.btn.btn-primary.landscape-hide(type='submit', value='submit')

@@ -5,6 +5,7 @@ html
         title Take Note
         link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
         link(rel='stylesheet' href='/css/main.css')
+        link(href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet")
         link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     body
         nav.navbar.navbar-inverse.bg-dark.col-sm-12
@@ -15,32 +16,52 @@ html
                     else
                         h5.navbar-brand.title Take Note
                 .nav.navbar-nav.justify-content-lg-start
-                    ul.nav.mbl
-                       
-                        if user
-                            li.nav-item.space
-                                a.nav-link(href='/notes/home') Home
-                            li.nav-item.space
-                                a.nav-link(href='/notes/add') Add Note
-                            li.nav-item.space 
-                                a.nav-link(href='/users/logout') Logout
-                        else
-                            li.nav-item.space
-                                a.nav-link(href='/') Home
+                    if user
+                   
+
+                    
+                    else
+                        ul.nav.mbl
                             li.nav-item.space
                                 a.nav-link(href='/users/register') Register
                             li.nav-item.space
                                 a.nav-link(href='/users/login') Login
+
+        if user
+            aside
+                .icon-bar
+                    a(href='/notes/add')
+                        i.fa.fa-plus
+                    a(href='/notes/home')
+                        i.fa.fa-home
+                    a(href='/users/logout')
+                        i.fa.fa-sign-out
+                    a(href='#')
+                        i.fa.fa-trash
+
         .container
             != messages('message', locals)
             if errors
                 each error, i in errors
                     div(class='alert alert-danger') #{error.msg}
+        .container
             block content
-            br
-            hr
+            .div-space1
             footer
+                hr
                 p Copyright &copy; 2018
+                .div-space
+                if user
+                    .show
+                        .icon-bar
+                            a(href='/notes/add')
+                                i.fa.fa-plus
+                            a(href='/notes/home')
+                                i.fa.fa-home
+                            a(href='/users/logout')
+                                i.fa.fa-sign-out
+                            a(href='#')
+                                i.fa.fa-trash
         script(src='/bower_components/jquery/dist/jquery.js')  
         script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
         script(src='/js/application.js')

@@ -1,13 +1,16 @@
 extends layout
 
 block content
-    h1= notes.title 
-    p= notes.body
-    hr
-    
-    a.btn.btn-danger.delete-note.float-right(href='#', data-id=notes._id) Delete
-    a.btn.btn-secondary.float-right(href='/notes/edit/'+notes._id) Edit 
-    a.btn.btn-dark(href='/notes/home') Back
+    .notes-title
+        h1= notes.title 
+    .notes-body
+        p= notes.body
+    a.edit.delete-note.float-right.footer.m(href='#', data-id=notes._id)
+        i.fa.fa-trash
+    a.edit.float-right.footer.m(href='/notes/edit/'+notes._id)
+        i.fa.fa-edit 
+    a.edit.float-left.footer(href='/notes/home')
+        i.fa.fa-arrow-left
     
     
         
