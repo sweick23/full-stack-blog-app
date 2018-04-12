@@ -123,7 +123,7 @@ p {
 }
 
 .div-space1 {
-    padding: 20px;
+    padding: 60px;
 }
 
 .icon-bar {
@@ -157,8 +157,12 @@ p {
     margin-top: -10px;
 }
 
+.edit:hover {
+    color: #3c763d;
+}
+
 .m {
-    margin-left: 10px;
+    margin-left: 20px;
 }
 
 footer {
